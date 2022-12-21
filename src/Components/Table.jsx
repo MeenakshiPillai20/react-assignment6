@@ -1,18 +1,10 @@
 import React, { useContext } from "react";
 import { StudentContext } from "../context/StudentContextProvider";
-// import StudentData from "./StudentData";
 
-export default function Table() {
-  // const mydata = useContext(Data);
-  // // const list = props.data;
-  // // const [list,setList]=useState([data]);
-  // console.log("data",mydata);
 
-  const [student] = useContext(StudentContext);
-  // const [student,setStudent]=useState([
-  //   {id:1, name:'Meenakshi',age:'23',course:"bca",batch:"mca"},
-  //   {id:2, name:'Meenakshi',age:'23',course:"bca",batch:"mca"}
-  // ])
+export default function Table(props) {
+
+  const { student } = useContext(StudentContext);
 
   return (
     <table id="details">
@@ -26,28 +18,19 @@ export default function Table() {
         </tr>
       </thead>
       <tbody>
-        {/* //    list.map((curEle)=> */}
-        {/* <tr>
-                       <td>{props.name}</td>
-                       <td>{props.age}</td>
-                       <td>{props.course}</td>
-                       <td>{props.batch}</td>
-                       <td><a href='#link'>{props.btn}</a></td>
-                   </tr> */}
-        {/* //    ) */}
         {student.map((stu) => {
-          return(
-          <tr key={stu.id}>
-            <td>{stu.name}</td>
-            <td>{stu.age}</td>
-            <td>{stu.course}</td>
-            <td>{stu.batch}</td>
-            <td>
-              <a href="#link">Edit</a>
-            </td>
-          </tr>
-          )
-          })}
+          return (
+            <tr key={stu.id}>
+              <td>{stu.name}</td>
+              <td>{stu.age}</td>
+              <td>{stu.course}</td>
+              <td>{stu.batch}</td>
+              <td>
+                <a href="#link">Edit</a>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

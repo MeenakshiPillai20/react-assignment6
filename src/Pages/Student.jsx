@@ -1,19 +1,17 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
+import { Link } from 'react-router-dom';
 import AddItem from '../Components/AddItem';
-import Table from '../Components/Table';
-import StudentContextProvider from '../context/StudentContextProvider';
+// import EditForm from '../Components/EditForm';
+import {StudentContext} from '../context/StudentContextProvider';
 
 
 const Student = (props) => {
     const [active,setActive] = useState();
+    // const [nactive,setnActive] = useState();
     const [isShown, setIsShown] = useState(true);
-    // const [records, setRecords] = useState([]);
-    
-    // const list = props.data;
-    // const list={id: new Date().getTime().toString(), name:props.name, age:props.age, course:props.course, batch:props.batch};
-    // const record = {...record,list}
-    // setList(...list,{id:list.length,})
-    // console.log(list);
+
+    const { student } = useContext(StudentContext);
+
     
     return (
         <>
@@ -24,12 +22,41 @@ const Student = (props) => {
 
     
             </header>
-<StudentContextProvider>
-  <Table />
-</StudentContextProvider>
+            <table id="details">
+      <thead>
+        <tr>
+          <td className="t-head">Name</td>
+          <td className="t-head">Age</td>
+          <td className="t-head">Course</td>
+          <td className="t-head">Batch</td>
+          <td className="t-head">Change</td>
+        </tr>
+      </thead>
+      <tbody>
+        {student.map((stu) => {
+          return (
+            <>
+            <tr key={stu.id}>
+              <td>{stu.name}</td>
+              <td>{stu.age}</td>
+              <td>{stu.course}</td>
+              <td>{stu.batch}</td>
+              <td>
+                <Link to="/editForm" state={{ theStudent: {stu} }}>Edit</Link> 
+              </td>
+              {/* {nactive ? <EditForm theStudent={stu}/> : null} */}
+            </tr>
+            
+            </>
+            
+          );
+        })}
+      </tbody>
+    </table>
            
         </div>
       {active ? <AddItem/> : null}
+     
      </>
     );
 }
